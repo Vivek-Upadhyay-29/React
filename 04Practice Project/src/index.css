@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+section {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 20px;
+
+}
+.button {
+    background-color: #e9f2e9; /* Green */
+    border: none;
+    border: 1px solid black;
+    color: rgb(0, 0, 0);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 26px;
+    font-weight: 600;
+    margin: 4px 7px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); 
+  }
+  .h1tag{
+    text-align: center;
+    font-size: 30px;
+    padding: 10px;
+     display: block;
+    color: white;
+    background-color:teal;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); 
+  }
+  @keyframes hover-effect {
+    0% {
+      transform: scale(1); /* Start at normal size */
+    }
+    100% {
+      transform: scale(1.05); /* Slightly larger on hover */
+    }
+  }
+  
+  @keyframes click-effect {
+    0% {
+      transform: scale(1); /* Start at normal size */
+    }
+    50% {
+      transform: scale(0.95); /* Shrink slightly on click */
+    }
+    100% {
+      transform: scale(1); /* Return to normal size */
+    }
+  }
+.button  {
+    /* Other button styles... */
+    animation: hover-effect 0.2s ease-in-out; /* Hover animation */
+  }
+  
+.button:active {
+    animation: click-effect 0.2s ease-in-out; /* Click animation */
+  }
