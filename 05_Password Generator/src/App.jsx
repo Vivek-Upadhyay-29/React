@@ -9,15 +9,19 @@ function App() {
   const [password , setPassword] = useState("")
   const passwordGenerator = useCallback(()=>{
   let pass = ""
-  let str = ""
-  if (numberAllowed) str += "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+  let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+  if (numberAllowed) str += "0123456789"
   if (characterAllowed) str += "!@#$%^&*(){}[]_,"
-  }, [length,numberAllowed,characterAllowed,setPassword])
+
   for(let i =1 ; i <= array.length ; i++ ){
     let char = Math.floor(Math.random() * str.length +1)
     pass = str.charAt(char)
     setPassword(pass)
   }
+  
+  }, [length,numberAllowed,characterAllowed,setPassword])
+  
+
 
   return (
     <>
