@@ -8,9 +8,13 @@ function App() {
  
 
   const [data, setData]= useState([]);
-  useEffect(()=>{
+  useEffect(() => {
     let url = `https://jsonplaceholder.typicode.com/posts`;
-    fetch(url).then((response)=>response.json()).then((json)=>setData(json)).catch((error)=> console.log(error))},[]);
+    fetch(url)
+      .then((response) => response.json())
+      .then((json) => setData(json))
+      .catch((error) => console.log(error));
+  }, []);
 
 
 
