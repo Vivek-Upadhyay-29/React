@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react"
 import { getTodos } from "./services/Api";
+import Todo from "./Todo";
 const App = ({ onEdit }) => {
   const [todos, setTodos] = useState([]);
   console.log(todos,'initial todo array');
@@ -43,6 +44,7 @@ const App = ({ onEdit }) => {
     //   </div>
 <>
 <div>
+    <Todo />
             <h2>Todo List</h2>
             <ul>
                 {todos.map(todo => (

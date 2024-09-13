@@ -1,7 +1,7 @@
 import axios from 'axios';// axios is a better alternative of fetch method
 
 const API_URL = 'http://localhost:8000/todo'; // (base URL)
-
+// "a"+"b" = "ab" string concatination
 // Fetch all todos
 export const getTodos = () => {//normal arrow function
     return axios.get(`${API_URL}/all`);//axios.get('http://localhost:8000/todo/all')
@@ -13,14 +13,15 @@ export const getTodos = () => {//normal arrow function
 // };
 
 // Create a new todo
-// export const createTodo = (todo) => {
-//     return axios.post(${API_URL}/new, todo);
-// };
+export const createTodo = (todo) => {
+    return axios.post(`${API_URL}/new`, todo);
+};
 
-// // Update a todo by ID
-// export const updateTodo = (id, updatedTodo) => {
-//     return axios.put(${API_URL}/${id}, updatedTodo);
-// };
+
+// Update a todo by ID
+export const updateTodo = (id, updatedTodo) => {
+    return axios.put(`${API_URL}/${id}`, updatedTodo);
+};  
 
 // // Delete a todo by ID
 // export const deleteTodo = (id) => {
