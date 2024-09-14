@@ -23,7 +23,7 @@ export const updateTodo = (id, updatedTodo) => {
     return axios.put(`${API_URL}/${id}`, updatedTodo);
 };  
 
-// // Delete a todo by ID
-// export const deleteTodo = (id) => {
-//     return axios.delete(${API_URL}/${id});
-// };
+// Delete a todo by ID
+export const deleteTodo = (id) => {
+    return axios.delete(`${API_URL}/${id}`);
+};

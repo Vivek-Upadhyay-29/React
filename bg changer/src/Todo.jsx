@@ -1,65 +1,50 @@
 import React, { useState, useEffect } from 'react';
-import { createTodo, updateTodo } from './services/Api.js';
+import { getTodos, 
+    deleteTodo 
+} from './services/Api.js';//in frontend , we should keep all api calling in a services file(best practice)
 
-const TodoForm = ({ todoToEdit, onFormSubmit }) => {
-    const [title, setTitle] = useState('');
-    const [completed, setCompleted] = useState(false);
+const TodoList = ({ onEdit }) => {
+    const [todos, setTodos] = useState([]);
+    console.log(todos,'initial todo array');
+    
 
     useEffect(() => {
-        // If there's a task to edit, prefill the form fields
-        if (todoToEdit) {
-            setTitle(todoToEdit.title);
-            setCompleted(todoToEdit.completed);
-        }
-    }, [todoToEdit]);
+        loadTodos();
+        console.log(todos,'after useeffect todo array');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    }, []);
 
-        // Create the new task object
-        const newTodo = { title, completed };
+    const loadTodos = async () => {//using async function because we dont know the exact time to get all todos from database
+        const response = await getTodos();// if 1 todo is present it will take less time than 1000 todo present in database
+        setTodos(response.data);
+    };
 
-        // If editing, call update; otherwise, call create
-        if (todoToEdit) {
-            await updateTodo(todoToEdit._id, newTodo);
-        } else {
-            await createTodo(newTodo);
-        }
-
-        // Reset form after submission
-        setTitle('');
-        setCompleted(false);
-        onFormSubmit();  // To reload the list or indicate form submission
+    const handleDelete = async (id) => {
+        await deleteTodo(id);
+        loadTodos();  // Reload the todos after deletion
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>{todoToEdit ? 'Edit Todo' : 'Add Todo'}</h2>
-            <input 
-                type="text" 
-                placeholder="Enter todo title" 
-                value={title} 
-                // onChange={(e) => setTitle(e.target.value)} 
-                onChange={(e) => {
-                    setTitle(e.target.value);
-                    console.log(e.target.value);
-                  }}
-                required
-            />
-            <label>
-                Completed:
-                <input 
-                    type="checkbox" 
-                    checked={completed} 
-                    onChange={() => setCompleted(!completed)}  // Toggle completed state
-                />
-            </label>
-            <button type="submit">
-                {/* {todoToEdit ? 'Update' : 'Add'} Todo */}
-                addtodo
-            </button>
-        </form>
+        <div>
+            <h2>Todo List</h2>
+            <ul>
+                {todos.map(todo => (
+                    <li key={todo._id}>
+                        <span>{todo.title}</span> -{'>'} 
+                        <strong>{todo.completed ? ' Completed' : ' Not Completed'}</strong>
+                        <button
+                         onClick={() => onEdit(todo)}
+                         >Edit</button>
+                        <button 
+                        onClick={() =>
+                             handleDelete(todo._id)
+                            }
+                             >Delete</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
     );
 };
 
-export default TodoForm;
+export default TodoList;
